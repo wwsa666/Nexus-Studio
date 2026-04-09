@@ -1,0 +1,1 @@
+H:/Drawing/saa-2.1.0-win32-x64/saa-win32-x64/resources/app/html/thumbs_data.js

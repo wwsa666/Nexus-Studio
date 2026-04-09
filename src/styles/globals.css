@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Nexus Studio - Global Styles
+   ============================================ */
+
+:root {
+    /* 背景色阶 */
+    --bg-app: #09090b;
+    --bg-panel: #18181b;
+    --bg-elevated: #27272a;
+
+    /* 边框 */
+    --border-subtle: #27272a;
+    --border-default: #3f3f46;
+
+    /* 主色 */
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+
+    /* 文字 */
+    --text-main: #e4e4e7;
+    --text-muted: #a1a1aa;
+    --text-dim: #71717a;
+
+    /* 状态色 */
+    --success: #22c55e;
+    --error: #ef4444;
+    --warning: #f59e0b;
+
+    /* 圆角 */
+    --radius: 8px;
+    --radius-lg: 12px;
+}
+
+/* 全局样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #52525b;
+}
+
+/* 选中文字样式 */
+::selection {
+    background: rgba(139, 92, 246, 0.3);
+    color: #fff;
+}
+
+/* 拖拽区域 (标题栏) */
+.drag-region {
+    -webkit-app-region: drag;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}
+
+/* 呼吸灯动画 */
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-breathe {
+    animation: breathe 2s ease-in-out infinite;
+}
+
+/* 辉光效果 */
+.glow-primary {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.glow-success {
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.glow-error {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Slide In Right (Drawer) */
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Fade In Up (Toast - Centered) */
+@keyframes fade-in-up {
+    from {
+        transform: translate(-50%, 10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out forwards;
+}
+
+/* Pulse Slow */
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .7;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 3s infinite;
+}
+
+/* Scrollbar Stable */
+.scrollbar-stable {
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+}
+
+/* Card Hover Transition (Smart Z-Index) */
+.card-hover-transition {
+    /* Leave state */
+    transition: transform 300ms cubic-bezier(0.2, 0, 0.2, 1), box-shadow 300ms ease-out, border-color 300ms ease-out;
+}
+
+.card-hover-transition:hover {
+    /* Enter state */
+    transition: transform 300ms cubic-bezier(0.2, 0, 0.2, 1), box-shadow 300ms ease-out, border-color 300ms ease-out;
+}
