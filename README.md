@@ -47,6 +47,8 @@
 - **信息浮层**：在图库悬浮查看之前的生图参数（Seed值、全部 Prompt）并支持任意框选文字右键复制。
 - **撤销误删**：加入了类似操作系统级的容错，手滑删除了好图？直接 `Ctrl+Z` 无缝恢复。
 <img width="2403" height="1440" alt="image" src="https://github.com/user-attachments/assets/f859a6fa-5f73-46e4-b4f0-8b29e50e7207" />
+<img width="2412" height="1437" alt="image" src="https://github.com/user-attachments/assets/63f4f964-d6f2-44a6-aaff-2c62a45c1193" />
+
 
 
 ---
