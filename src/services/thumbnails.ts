@@ -38,35 +38,42 @@ export async function loadThumbsDatabase(): Promise<boolean> {
 
     thumbsLoading = true
 
-    return new Promise((resolve) => {
-        // 尝试从原始应用目录加载
-        // 从 public 目录加载
-        const script = document.createElement('script')
-        script.src = './thumbs_data.js'
-        script.async = true
+    return new Promise(async (resolve) => {
+        try {
+            // Get the absolute URL path to thumbs_data.js via Electron API
+            const thumbsPath = await window.electronAPI.getThumbsPath()
+            
+            const script = document.createElement('script')
+            script.src = thumbsPath
+            script.async = true
 
-        script.onload = () => {
-            if (window.THUMBS_DB) {
-                thumbsLoaded = true
-                console.log('[Thumbs] Loaded database with', Object.keys(window.THUMBS_DB).length, 'entries')
-            } else {
-                console.warn('[Thumbs] Script loaded but THUMBS_DB not found')
+            script.onload = () => {
+                if (window.THUMBS_DB) {
+                    thumbsLoaded = true
+                    console.log('[Thumbs] Loaded database with', Object.keys(window.THUMBS_DB).length, 'entries')
+                } else {
+                    console.warn('[Thumbs] Script loaded but THUMBS_DB not found')
+                }
+                thumbsLoading = false
+                loadCallbacks.forEach(cb => cb())
+                loadCallbacks = []
+                resolve(thumbsLoaded)
             }
-            thumbsLoading = false
-            loadCallbacks.forEach(cb => cb())
-            loadCallbacks = []
-            resolve(thumbsLoaded)
-        }
 
-        script.onerror = () => {
-            console.error('[Thumbs] Failed to load thumbs_data.js')
+            script.onerror = () => {
+                console.error('[Thumbs] Failed to load thumbs_data.js from', thumbsPath)
+                thumbsLoading = false
+                loadCallbacks.forEach(cb => cb())
+                loadCallbacks = []
+                resolve(false)
+            }
+
+            document.body.appendChild(script)
+        } catch (e) {
+            console.error('[Thumbs] Error getting thumbs path', e)
             thumbsLoading = false
-            loadCallbacks.forEach(cb => cb())
-            loadCallbacks = []
             resolve(false)
         }
-
-        document.body.appendChild(script)
     })
 }
 

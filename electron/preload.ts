@@ -21,6 +21,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     loadCustomCharacters: () => ipcRenderer.invoke('load-custom-characters'),
     deleteCharacterImage: (imagePath: string) => ipcRenderer.invoke('delete-character-image', imagePath),
     getUserDataPath: () => ipcRenderer.invoke('get-user-data-path'),
+    getThumbsPath: () => ipcRenderer.invoke('get-thumbs-path'),
     showOpenDialog: (options: any) => ipcRenderer.invoke('show-open-dialog', options),
     copyCharacterImage: (sourcePath: string) => ipcRenderer.invoke('copy-character-image', sourcePath),
     readImageFromClipboard: () => ipcRenderer.invoke('read-image-from-clipboard'),
@@ -46,6 +47,7 @@ declare global {
             loadCustomCharacters: () => Promise<{ added: any[], deleted: string[] }>
             saveCustomCharacters: (data: { added: any[], deleted: string[] }) => Promise<boolean>
             getUserDataPath: () => Promise<string>
+            getThumbsPath: () => Promise<string>
         }
     }
 }

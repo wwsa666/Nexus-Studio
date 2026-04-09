@@ -384,6 +384,14 @@ ipcMain.handle('delete-character-image', async (_event, imagePath: string) => {
 
 ipcMain.handle('get-user-data-path', () => app.getPath('userData'))
 
+ipcMain.handle('get-thumbs-path', () => {
+    // thumbs_data.js is located in the root or dist-electron. We load it relative to appPath.
+    // In dev: appPath is project root (H:/...). In prod: appPath is resources/app.
+    // The user placed it in dist-electron.
+    const thumbsPath = path.join(app.getAppPath(), 'dist-electron', 'thumbs_data.js')
+    return `file://${thumbsPath.replace(/\\/g, '/')}`
+})
+
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
